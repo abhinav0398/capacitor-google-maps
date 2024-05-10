@@ -1251,6 +1251,7 @@ class CapacitorGoogleMap(
 
             isReadyChannel.send(true)
             isReadyChannel.close()
+            map.uiSettings.isZoomControlsEnabled= true
         }
     }
 

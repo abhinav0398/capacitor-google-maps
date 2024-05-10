@@ -34,11 +34,11 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
             val loading = it.infoData?.getBoolean("loading")
             val apiFail = it.infoData?.getBoolean("apiFail")
 
-            val infoWindowTitleLayout = view.findViewById<LinearLayout>(R.id.info_window_title)
-            val vehicleNumberOneLayout = view.findViewById<LinearLayout>(R.id.vehicle_number_one)
-            val etaOneLayout = view.findViewById<LinearLayout>(R.id.eta_one)
-            val vehicleNumberTwoLayout = view.findViewById<LinearLayout>(R.id.vehicle_number_two)
-            val etaTwoLayout = view.findViewById<LinearLayout>(R.id.eta_two)
+            val infoWindowTitleLayout = view.findViewById<TextView>(R.id.info_window_title)
+            val vehicleNumberOneLayout = view.findViewById<TextView>(R.id.vehicle_number_one)
+            val etaOneLayout = view.findViewById<TextView>(R.id.eta_one)
+            val vehicleNumberTwoLayout = view.findViewById<TextView>(R.id.vehicle_number_two)
+            val etaTwoLayout = view.findViewById<TextView>(R.id.eta_two)
             
             
 
@@ -56,7 +56,7 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
                 vehicleNumberTwoLayout.visibility = View.GONE;
                 etaTwoLayout.visibility = View.GONE;
             } else {
-                infoWindowTitleLayout.text = infoWindowTitle:
+                infoWindowTitleLayout.text = infoWindowTitle;
                 vehicleNumberOneLayout.text = vehicleNumberOne;
                 etaOneLayout.text = etaOne;
                 vehicleNumberTwoLayout.text = vehicleNumberTwo;

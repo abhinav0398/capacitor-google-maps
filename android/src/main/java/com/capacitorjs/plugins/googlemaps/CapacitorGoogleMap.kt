@@ -246,6 +246,10 @@ class CapacitorGoogleMap(
                                 val bridge = delegate.bridge
                                 googleMapMarker?.tag = it
                                 googleMap?.setInfoWindowAdapter(BusesMarkerInfoWindow(bridge.context))
+                            } else if(it.infoIcon.equals("stop_info_icon")) {
+                                val bridge = delegate.bridge
+                                googleMapMarker?.tag = it
+                                googleMap?.setInfoWindowAdapter(StopInfoWindow(bridge.context))
                             } else {
                                 val bridge = delegate.bridge
                                 googleMapMarker?.tag = it
@@ -371,6 +375,10 @@ class CapacitorGoogleMap(
                             val bridge = delegate.bridge
                             googleMapMarker?.tag = marker
                             googleMap?.setInfoWindowAdapter(BusesMarkerInfoWindow(bridge.context))
+                        } else if(marker.infoIcon.equals("stop_info_icon")) {
+                            val bridge = delegate.bridge
+                            googleMapMarker?.tag = marker
+                            googleMap?.setInfoWindowAdapter(StopInfoWindow(bridge.context))
                         } else {
                             val bridge = delegate.bridge
                             googleMapMarker?.tag = marker
@@ -397,6 +405,10 @@ class CapacitorGoogleMap(
                             if(marker.infoIcon.equals("buses_info_icon")) {
                                 val bridge = delegate.bridge
                                 googleMap?.setInfoWindowAdapter(BusesMarkerInfoWindow(bridge.context))
+                            }
+                            if(marker.infoIcon.equals("stop_info_icon")) {
+                                val bridge = delegate.bridge
+                                googleMap?.setInfoWindowAdapter(StopInfoWindow(bridge.context))
                             }
                         }
                         googleMapMarker?.remove()
@@ -551,6 +563,16 @@ class CapacitorGoogleMap(
 
                             if (!marker.infoIcon.isNullOrEmpty()) {
                                 if (marker.infoIcon.equals("buses_info_icon")) {
+                                    if( marker.infoData?.getBoolean("showInfoIcon") == true) {
+                                        val bridge = delegate.bridge
+                                        oldMarker?.googleMapMarker?.tag = marker
+                                        oldMarker?.googleMapMarker?.showInfoWindow()
+                                    } else {
+                                        oldMarker?.googleMapMarker?.hideInfoWindow()
+                                    }
+
+                                }
+                                if (marker.infoIcon.equals("stop_info_icon")) {
                                     if( marker.infoData?.getBoolean("showInfoIcon") == true) {
                                         val bridge = delegate.bridge
                                         oldMarker?.googleMapMarker?.tag = marker
@@ -733,6 +755,7 @@ class CapacitorGoogleMap(
                 // Only for buses page marker info window. If new cluster marker info window is made then update 
                 // the below line with condition
                 googleMap?.setInfoWindowAdapter(BusesMarkerInfoWindow(bridge.context))
+                googleMap?.setInfoWindowAdapter(StopInfoWindow(bridge.context))
 
 
 

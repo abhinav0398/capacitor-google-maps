@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.capacitorjs.plugins.googlemaps.BusesMarkerInfoWindow
+import com.capacitorjs.plugins.googlemaps.StopInfoWindow
 import com.capacitorjs.plugins.googlemaps.CapacitorGoogleMapMarker
 import com.capacitorjs.plugins.googlemaps.R
 import com.google.android.gms.maps.GoogleMap
@@ -35,6 +36,7 @@ class BusesMarkerRenderer(
 //        Log.d("BusesMarkerRenderer", "onBeforeClusterItemRendered ${item.iconUrl} ${item.title}")
         markerOptions.icon(item.iconUrl?.let { busesMarker.getMarkerIcon(item.title, it) })
         map?.setInfoWindowAdapter(BusesMarkerInfoWindow(context))
+        map?.setInfoWindowAdapter(StopInfoWindow(context))
     }
 
     override fun onClusterItemUpdated(item: CapacitorGoogleMapMarker, marker: Marker) {

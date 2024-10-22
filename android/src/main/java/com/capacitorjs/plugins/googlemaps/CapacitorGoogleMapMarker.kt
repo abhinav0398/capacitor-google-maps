@@ -32,7 +32,7 @@ class CapacitorGoogleMapMarker(val context: Context, fromJSONObject: JSONObject)
     var infoData: JSONObject? = null
     var rotation: Int = 0
     var id: String? = null
-    private var customAnchor: CapacitorGoogleMapsPoint = CapacitorGoogleMapsPoint(0.5F, 0.5F)
+    private var customAnchor: CapacitorGoogleMapsPoint = CapacitorGoogleMapsPoint(0.5F, 1F)
 
     init {
         if (!fromJSONObject.has("coordinate")) {

@@ -615,7 +615,8 @@ class CapacitorGoogleMap(
                         callback(Result.success(markerId))
 
                     } else {
-                        throw Exception("Marker for setMarkerPosition is not Found.")
+                        Log.d("setMarkerPosition Error", "Marker for setMarkerPosition is not Found.")
+                        //throw Exception("Marker for setMarkerPosition is not Found.")
                     }
                 }
             } catch (e: GoogleMapsError) {

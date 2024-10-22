@@ -27,6 +27,7 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
         return myMarker?.let {
             var view: View? = null;
 
+            //FETCHING JS DATA
             val viewType = it.infoData?.getString("viewType")
             val infoWindowTitle = it.infoData?.getString("infoWindowTitle")
             val vehicleNumberOne = it.infoData?.getString("vehicleNumberOne")
@@ -37,6 +38,8 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
             val apiFail = it.infoData?.getBoolean("apiFail")
             val busNumber = it.infoData?.getString("busNumber")
             val isBusItemTwo = it.infoData?.getBoolean("isBusItemTwo")
+            val busIconOne = it.infoData?.getBoolean("busIconOne")
+            val busIconTwo = it.infoData?.getBoolean("busIconTwo")
 
             view = if(viewType == "STOPS"){
                 LayoutInflater.from(context).inflate(R.layout.stop_info_window, null);
@@ -44,15 +47,19 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
                 LayoutInflater.from(context).inflate(R.layout.bus_info_window, null);
             }
 
-            //STOP INFO WINDOW PARAMETERS
+            //FETCHING STOP INFO WINDOW XML PARAMETERS
             val infoWindowTitleLayout = view.findViewById<TextView>(R.id.info_window_title)
             val vehicleNumberOneLayout = view.findViewById<TextView>(R.id.vehicle_number_one)
             val etaOneLayout = view.findViewById<TextView>(R.id.eta_one)
             val vehicleNumberTwoLayout = view.findViewById<TextView>(R.id.vehicle_number_two)
             val etaTwoLayout = view.findViewById<TextView>(R.id.eta_two)
             val isBusItemTwoLayout = view.findViewById<LinearLayout>(R.id.bus_item_two)
+            val viewLineOneLayout = view.findViewById<View>(R.id.view_line_one)
             val viewLineTwoLayout = view.findViewById<View>(R.id.view_line_two)
             val seeMoreBusesLayout = view.findViewById<Button>(R.id.see_more_buses)
+            val busIconOneLayout = view.findViewById<ImageView>(R.id.bus_icon_one)
+            val busIconTwoLayout = view.findViewById<ImageView>(R.id.bus_icon_two)
+
 
             //BUS INFO WINDOW PARAMETERS
             val busNumberLayout = view.findViewById<TextView>(R.id.bus_number)
@@ -79,10 +86,22 @@ class StopInfoWindow(private val context: Context) : GoogleMap.InfoWindowAdapter
                     etaOneLayout.text = etaOne;
                     vehicleNumberTwoLayout.text = vehicleNumberTwo;
                     etaTwoLayout.text = etaTwo;
+                    if(etaOne == "No Live Buses"){
+                        vehicleNumberOneLayout.visibility = View.GONE;
+                        viewLineOneLayout.visibility = View.GONE;
+                        busIconOneLayout.visibility = View.GONE;
+                    }
                     if(isBusItemTwo == false){
                         isBusItemTwoLayout.visibility = View.INVISIBLE;
                         viewLineTwoLayout.visibility = View.INVISIBLE;
                         seeMoreBusesLayout.visibility = View.INVISIBLE;
+                    }
+                    
+                    if(busIconOne == true) {
+                        busIconOneLayout.setImageResource(R.drawable.info_window_bus_icon_blue);
+                    }
+                    if(busIconTwo == true){
+                        busIconTwoLayout.setImageResource(R.drawable.info_window_bus_icon_blue);
                     }
                 }else{
                     busNumberLayout.text = busNumber;
